@@ -1,16 +1,18 @@
 require 'cucumber'
-require 'watir-webdriver'
+require 'watir'
 
-Given(/^a user goes to phptravels/) do
+Given(/^I am on the booking site/) do
   @browser = Watir::Browser.new :chrome
-  @browser.goto "https://www.phptravels.net/home"
+  @browser.window.maximize
+  @browser.goto 'https://www.phptravels.net/home'
 end
 
-When(/^the user clicks on "([^"]*)" element$/) do |arg|
-  @browser.button(visible_text: "#{arg}").click
+When(/^I choose "([^"]*)" element$/) do |arg|
+  flights_tab = @browser.iframe(text: '#{arg}').exist?
+    #flights_tab.click
 end
 
-Then(/^flight results should be loaded$/) do
-  @browser.wait_until_present(timeout=10)
+Then(/^flight results should be displayed$/) do
+  sleep(10)
   @browser.close
 end

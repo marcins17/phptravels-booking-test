@@ -24,19 +24,21 @@ GEM
     gherkin (5.1.0)
     multi_json (1.14.1)
     multi_test (0.1.2)
+    regexp_parser (1.7.0)
     rubyzip (2.3.0)
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
-    watir-webdriver (0.9.9)
-      selenium-webdriver (>= 2.46.2)
+    watir (6.16.5)
+      regexp_parser (~> 1.2)
+      selenium-webdriver (~> 3.6)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   cucumber
-  watir-webdriver
+  watir
 
 BUNDLED WITH
    2.1.4
