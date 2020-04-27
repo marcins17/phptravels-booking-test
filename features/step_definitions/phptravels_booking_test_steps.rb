@@ -23,16 +23,18 @@ And(/^I provide "([^"]*)" as a starting point$/) do |arg|
 end
 
 And(/^I provide "([^"]*)" as a destination point$/) do |arg|
-  result_label = @browser.div(:class => "select2-result-label")
+  #result_li = @browser.li(:class => /result-selectable/)
   @browser.div(:id => "s2id_location_to").click
   if @browser.text_field(:class => "select2-input").exists?
     @browser.text_field(:class => /select2-focused/).set("#{arg}")
-    if result_label.exists?
-      result_label.click
-    else
-      @browser.div(:id => "select2-drop-mask").click
-    end
+    # if result_li.exists?
+    #   @browser.text_field(:class => /select2-focused/).click
+    # else
+    #   @browser.div(:id => "select2-drop-mask").click
+    # end
   end
+  sleep(3)
+  @browser.div(:class => "select2-result-label").click
 end
 
 Then(/^flight results should be displayed$/) do
