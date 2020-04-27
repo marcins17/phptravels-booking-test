@@ -1,18 +1,50 @@
-require 'cucumber'
-require 'watir'
+require "cucumber"
+require "watir"
 
-Given(/^I am on the booking site/) do
-  @browser = Watir::Browser.new :chrome
-  @browser.window.maximize
-  @browser.goto 'https://www.phptravels.net/home'
+Given(/^I am on the PHPTRAVELS booking site/) do
+  @browser.goto "https://www.phptravels.net/home"
 end
 
-When(/^I choose "([^"]*)" element$/) do |arg|
-  flights_tab = @browser.iframe(text: '#{arg}').exist?
-    #flights_tab.click
+When(/^I select "([^"]*)" section$/) do |arg|
+  @browser.link(href: /#{arg}/).click
+end
+
+And(/^I provide "([^"]*)" as a starting point$/) do |arg|
+  result_label = @browser.div(:class => "select2-result-label")
+  @browser.div(:id => "s2id_location_from").click
+  if @browser.text_field(:class => "select2-input").exists?
+    @browser.text_field(:class => /select2-focused/).set("#{arg}")
+    if result_label.exists?
+      result_label.click
+    else
+      @browser.div(:id => "select2-drop-mask").click
+    end
+  end
+end
+
+And(/^I provide "([^"]*)" as a destination point$/) do |arg|
+  result_label = @browser.div(:class => "select2-result-label")
+  @browser.div(:id => "s2id_location_to").click
+  if @browser.text_field(:class => "select2-input").exists?
+    @browser.text_field(:class => /select2-focused/).set("#{arg}")
+    if result_label.exists?
+      result_label.click
+    else
+      @browser.div(:id => "select2-drop-mask").click
+    end
+  end
 end
 
 Then(/^flight results should be displayed$/) do
-  sleep(10)
-  @browser.close
+  sleep(2)
+
 end
+
+# def provide_travel_point(location_div, city)
+#   @browser.div(:id => "#{location_div}").click
+#   if @browser.text_field(:class => "select2-input").exists?
+#     @browser.text_field(:class => /select2-focused/).set("#{city}")
+#     sleep(3)
+#     @browser.div(:class => "select2-result-label").click
+#   end
+# end
