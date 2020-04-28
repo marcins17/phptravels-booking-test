@@ -9,7 +9,7 @@ Feature: PHPTRAVELS flight booking feature
     When I select "flights" section
     And I provide "NYC" as a starting point
     And I provide "Munich" as a destination point
-    And I select depart date two weeks from current date
+    And I select depart date two weeks later than current date
     Then flight results should be displayed
 #    And should be sorted by price
 
