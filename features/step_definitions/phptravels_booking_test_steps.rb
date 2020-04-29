@@ -22,7 +22,6 @@ end
 And(/^I select departure date in "([^"]*)" days$/) do |arg|
   current_date = Date.today
   depart_date_list = get_date_and_return_departure_date(current_date, ("#{arg}").to_i)
-  #depart_date_list = [2020, 3, 29]
   call_calendar = @browser.input(:name => "departure_date")
   call_calendar.click
   departure_date_input = @browser.div(:class => %w(datepicker active)).div(:data_date => depart_date_list[2].to_s,
