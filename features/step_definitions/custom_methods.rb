@@ -14,8 +14,8 @@ def set_travel_point(city)
 end
 
 def get_date_and_return_departure_date(current_date, days_to_departure)
-  two_weeks_later_str = (current_date + days_to_departure).to_s
-  departure_date_splitted = two_weeks_later_str.split("-")
+  departure_date = (current_date + days_to_departure).to_s
+  departure_date_splitted = departure_date.split("-")
   departure_year = departure_date_splitted[0]
   departure_month_decremented = ((remove_leading_zero(departure_date_splitted[1]).to_i) - 1).to_s
   departure_day = remove_leading_zero(departure_date_splitted[2])
