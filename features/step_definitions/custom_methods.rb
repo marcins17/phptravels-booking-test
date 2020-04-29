@@ -13,20 +13,17 @@ def set_travel_point(city)
   end
 end
 
-def format_departure_date
-  current_date = Date.today
-  puts "Inserting departure date"
-  current_date_str = current_date.to_s
-  two_weeks_later_str = (current_date + 14).to_s
-  puts "Today date: " + current_date_str
-  puts "Departure date: " + two_weeks_later_str
-  date_splitted = two_weeks_later_str.split("-")
-  year = date_splitted[0]
-  month = date_splitted[1]
-  day = date_splitted[2]
-  month_formatted = month.sub(/^[0]*/,"")
-  month_formatted_decremented_int = month_formatted.to_i - 1 #months are indexed starting from 0
-  month_formatted_decremented = month_formatted_decremented_int.to_s
-  day_formatted = day.sub(/^[0]*/,"")
-  return [year, month_formatted_decremented, day_formatted]
+def get_date_and_return_departure_date(current_date, days_to_departure)
+  two_weeks_later_str = (current_date + days_to_departure).to_s
+  departure_date_splitted = two_weeks_later_str.split("-")
+  departure_year = departure_date_splitted[0]
+  departure_month_decremented = ((remove_leading_zero(departure_date_splitted[1]).to_i) - 1).to_s
+  departure_day = remove_leading_zero(departure_date_splitted[2])
+  return [departure_year, departure_month_decremented, departure_day]
 end
+
+def remove_leading_zero(number_str)
+  number_no_leading_zero = number_str.sub(/^[0]*/,"")
+  return number_no_leading_zero
+end
+
