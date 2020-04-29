@@ -2,14 +2,17 @@ require 'watir'
 require 'date'
 
 def set_travel_point(city)
-  if @browser.text_field(:class => "select2-input").exists?
-    @browser.text_field(:class => /select2-focused/).set("#{city}")
+  input_field = @browser.text_field(:class => "select2-input")
+  input_field_active = @browser.text_field(:class => /select2-focused/)
+  input_result_label = @browser.div(:class => "select2-result-label")
+  input_drop_mask = @browser.div(:id => "select2-drop-mask")
+  if input_field.exists?
+    input_field_active.set("#{city}")
   end
-  sleep(3)
-  if @browser.div(:class => "select2-result-label").exists?
-    @browser.div(:class => "select2-result-label").click
+  if input_result_label.wait_until_present.exists?
+    input_result_label.click
   else
-    @browser.div(:id => "select2-drop-mask").click
+    input_drop_mask.click
   end
 end
 
