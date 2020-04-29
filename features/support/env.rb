@@ -3,7 +3,7 @@ require 'watir'
 
 Before do
   @browser = Watir::Browser.new :chrome
-    #@browser.window.maximize
+  @browser.window.maximize
 end
 
 After do
