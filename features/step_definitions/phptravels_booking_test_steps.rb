@@ -32,11 +32,30 @@ And(/^I select departure date in "([^"]*)" days$/) do |arg|
 end
 
 And(/^I select "([^"]*)" adults$/) do |arg|
-  set_number_of_passenger("#{arg}".to_i)
+  #
+  #add_button = @browser.div(:class => %w(col o2)).button(:class => %w(btn bootstrap-touchspin-up))
+  #
+  # I was trying with button implementation like above, but no action happened after click
+  add_button = @browser.element(
+      :xpath => "//*[@id='flights']/div/div/form/div/div[3]/div[3]/div/div/div[1]/div/div[2]/div/span/button[1]")
+  adults = ("#{arg}".to_i - 1)
+  adults.times do
+    add_button.click
+  end
 end
 
 And(/^I select "([^"]*)" children$/) do |arg|
-  set_number_of_passenger("#{arg}".to_i)
+  #
+  #add_button = @browser.div(:class => %w(col o1)).button(:class => %w(btn bootstrap-touchspin-up))
+  #
+  # I was trying with button implementation like above, but no action happened after click
+  #
+  add_button = @browser.element(
+      :xpath => "//*[@id='flights']/div/div/form/div/div[3]/div[3]/div/div/div[2]/div/div[2]/div/span/button[1]")
+  children = "#{arg}".to_i
+  children.times do
+    add_button.click
+  end
 end
 
 And(/^I submit data by clicking search button$/) do
@@ -45,7 +64,7 @@ And(/^I submit data by clicking search button$/) do
   search_button.fire_event("click")
 end
 
-Then(/^flight results should be displayed$/) do
-  sleep(2)
+Then(/^flight results should be displayed by price ascending$/) do
+  sleep(4)
 
 end

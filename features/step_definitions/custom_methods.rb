@@ -6,10 +6,11 @@ def set_travel_point(city)
   input_field_active = @browser.text_field(:class => /select2-focused/)
   input_result_label = @browser.div(:class => "select2-result-label")
   input_drop_mask = @browser.div(:id => "select2-drop-mask")
-  if input_field.exists?
+  if input_field.wait_while_present.exists?
     input_field_active.set("#{city}")
   end
-  if input_result_label.wait_until_present.exists?
+  sleep(2)
+  if input_result_label.exists?
     input_result_label.click
   else
     input_drop_mask.click
@@ -32,16 +33,13 @@ end
 
 def insert_departure_date(departure_date_input, next_month_button)
   unless departure_date_input.exists?
-    puts "not exits"
     next_month_button.fire_event("mousedown")
     next_month_button.fire_event("click")
     departure_date_input.wait_until_present
     departure_date_input.fire_event("mousedown")
     departure_date_input.fire_event("click")
   else
-    puts "exists"
     departure_date_input.fire_event("mousedown")
     departure_date_input.fire_event("click")
   end
 end
-
