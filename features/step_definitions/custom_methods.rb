@@ -30,3 +30,18 @@ def remove_leading_zero(number_str)
   return number_no_leading_zero
 end
 
+def insert_departure_date(departure_date_input, next_month_button)
+  unless departure_date_input.exists?
+    puts "not exits"
+    next_month_button.fire_event("mousedown")
+    next_month_button.fire_event("click")
+    departure_date_input.wait_until_present
+    departure_date_input.fire_event("mousedown")
+    departure_date_input.fire_event("click")
+  else
+    puts "exists"
+    departure_date_input.fire_event("mousedown")
+    departure_date_input.fire_event("click")
+  end
+end
+
