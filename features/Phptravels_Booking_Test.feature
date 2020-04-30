@@ -12,5 +12,4 @@ Feature: PHPTRAVELS flight booking feature
     And I select "2" children
     And I submit data by clicking search button
     Then flight results should be displayed by price ascending
-
-
+    #actually only results are displayed, sorting verification not implemented yet
