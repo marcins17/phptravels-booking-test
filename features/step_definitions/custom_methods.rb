@@ -14,20 +14,6 @@ def set_travel_point(city)
   end
 end
 
-def get_date_and_return_departure_date(current_date, days_to_departure)
-  departure_date = (current_date + days_to_departure).to_s
-  departure_date_splitted = departure_date.split("-")
-  departure_year = departure_date_splitted[0]
-  departure_month_decremented = ((remove_leading_zero(departure_date_splitted[1]).to_i) - 1).to_s
-  departure_day = remove_leading_zero(departure_date_splitted[2])
-  return [departure_year, departure_month_decremented, departure_day]
-end
-
-def remove_leading_zero(number_str)
-  number_no_leading_zero = number_str.sub(/^[0]*/,"")
-  return number_no_leading_zero
-end
-
 def insert_departure_date(departure_date_input, next_month_button)
   if departure_date_input.exists?
     click_on_element_fire_event(departure_date_input)
