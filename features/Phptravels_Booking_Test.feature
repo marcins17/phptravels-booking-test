@@ -23,5 +23,6 @@ Feature: PHPTRAVELS flight booking feature
     #Then booking summary displays correct information
   
   #Scenario: Book a flight using the fastest route
+    #---credential input, next steps
     #Then ticket with the fastest route should be booked
     
