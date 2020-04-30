@@ -3,6 +3,7 @@ require 'date'
 
 Given(/^I am on the booking site homepage/) do
   @browser.goto "https://www.phptravels.net/home"
+    #@browser.goto "https://www.phptravels.net/thflights/search/NYC/MUC/oneway/economy/2020-05-14/2/2/0"
 end
 
 When(/^I select "([^"]*)" section$/) do |arg|
@@ -21,12 +22,18 @@ end
 
 And(/^I select departure date in "([^"]*)" days$/) do |arg|
   current_date = Date.today
-  depart_date_list = get_date_and_return_departure_date(current_date, ("#{arg}").to_i)
+  days_to_departure = "#{arg}".to_i
+  departure_date = (current_date + days_to_departure).to_s
+  departure_date_splitted = departure_date.split("-")
+  departure_year = departure_date_splitted[0]
+  departure_month = (departure_date_splitted[1].sub(/^[0]*/,"").to_i - 1).to_s
+  departure_day = departure_date_splitted[2].sub(/^[0]*/,"")
+
   call_calendar = @browser.input(:name => "departure_date")
   call_calendar.click
-  departure_date_input = @browser.div(:class => %w(datepicker active)).div(:data_date => depart_date_list[2].to_s,
-                                                                           :data_month => depart_date_list[1].to_s,
-                                                                           :data_year => depart_date_list[0].to_s)
+  departure_date_input = @browser.div(:class => %w(datepicker active)).div(:data_date => departure_day,
+                                                                           :data_month => departure_month,
+                                                                           :data_year => departure_year)
   next_month_button = @browser.div(:class => %w(datepicker active)).div(:data_action => "next")
   insert_departure_date(departure_date_input, next_month_button)
 end
