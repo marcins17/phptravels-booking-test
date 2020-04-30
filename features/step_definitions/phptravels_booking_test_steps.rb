@@ -23,18 +23,14 @@ end
 And(/^I select departure date in "([^"]*)" days$/) do |arg|
   current_date = Date.today
   days_to_departure = "#{arg}".to_i
-  departure_date = (current_date + days_to_departure).to_s
-  departure_date_splitted = departure_date.split("-")
-  departure_year = departure_date_splitted[0]
-  departure_month = (departure_date_splitted[1].sub(/^[0]*/,"").to_i - 1).to_s
-  departure_day = departure_date_splitted[2].sub(/^[0]*/,"")
-
-  call_calendar = @browser.input(:name => "departure_date")
-  call_calendar.click
-  departure_date_input = @browser.div(:class => %w(datepicker active)).div(:data_date => departure_day,
-                                                                           :data_month => departure_month,
-                                                                           :data_year => departure_year)
+  departure_date = (current_date + days_to_departure).to_s.split("-")
+  departure_date_input = @browser.div(:class => %w(datepicker active)).div(
+      :data_date => departure_date[2].sub(/^[0]*/,""),
+      :data_month => (departure_date[1].sub(/^[0]*/,"").to_i - 1).to_s,
+      :data_year => departure_date[0])
   next_month_button = @browser.div(:class => %w(datepicker active)).div(:data_action => "next")
+  calendar = @browser.input(:name => "departure_date")
+  calendar.click
   insert_departure_date(departure_date_input, next_month_button)
 end
 
