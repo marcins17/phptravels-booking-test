@@ -2,18 +2,15 @@ require 'watir'
 require 'date'
 
 def set_travel_point(city)
-  input_field = @browser.text_field(:class => "select2-input")
   input_field_active = @browser.text_field(:class => /select2-focused/)
   input_result_label = @browser.div(:class => "select2-result-label")
   input_drop_mask = @browser.div(:id => "select2-drop-mask")
-  if input_field.wait_while_present.exists?
-    input_field_active.set("#{city}")
-  end
-  sleep(2)
+  input_field_active.set("#{city}")
+  sleep(3)   # let the result suggestion appear after typing
   if input_result_label.exists?
     input_result_label.click
   else
-    input_drop_mask.click
+      input_drop_mask.click
   end
 end
 
@@ -32,14 +29,16 @@ def remove_leading_zero(number_str)
 end
 
 def insert_departure_date(departure_date_input, next_month_button)
-  unless departure_date_input.exists?
-    next_month_button.fire_event("mousedown")
-    next_month_button.fire_event("click")
-    departure_date_input.wait_until_present
-    departure_date_input.fire_event("mousedown")
-    departure_date_input.fire_event("click")
+  if departure_date_input.exists?
+    click_on_element_fire_event(departure_date_input)
   else
-    departure_date_input.fire_event("mousedown")
-    departure_date_input.fire_event("click")
+    click_on_element_fire_event(next_month_button)
+    departure_date_input.wait_until_present
+    click_on_element_fire_event(departure_date_input)
   end
+end
+
+def click_on_element_fire_event(element)
+  element.fire_event("mousedown")
+  element.fire_event("click")
 end
