@@ -16,15 +16,15 @@ end
 
 def insert_departure_date(departure_date_input, next_month_button)
   if departure_date_input.exists?
-    click_on_element_fire_event(departure_date_input)
+    click_on_element(departure_date_input)
   else
-    click_on_element_fire_event(next_month_button)
+    click_on_element(next_month_button)
     departure_date_input.wait_until_present
-    click_on_element_fire_event(departure_date_input)
+    click_on_element(departure_date_input)
   end
 end
 
-def click_on_element_fire_event(element)
+def click_on_element(element)
   element.fire_event("mousedown")
   element.fire_event("click")
 end

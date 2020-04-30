@@ -63,8 +63,7 @@ end
 
 And(/^I submit data by clicking search button$/) do
   search_button = @browser.button(:type => "submit", :class => "btn-primary btn btn-block")
-  search_button.fire_event("mousedown")
-  search_button.fire_event("click")
+  click_on_element(search_button)
 end
 
 Then(/^flight results should be displayed by price ascending$/) do
