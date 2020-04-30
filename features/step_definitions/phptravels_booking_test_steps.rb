@@ -29,9 +29,14 @@ And(/^I select departure date in "([^"]*)" days$/) do |arg|
       :data_month => (departure_date[1].sub(/^[0]*/,"").to_i - 1).to_s,
       :data_year => departure_date[0])
   next_month_button = @browser.div(:class => %w(datepicker active)).div(:data_action => "next")
-  calendar = @browser.input(:name => "departure_date")
-  calendar.click
-  insert_departure_date(departure_date_input, next_month_button)
+  @browser.input(:name => "departure_date").click
+  if departure_date_input.exists?
+    click_on_element(departure_date_input)
+  else
+    click_on_element(next_month_button)
+    departure_date_input.wait_until_present
+    click_on_element(departure_date_input)
+  end
 end
 
 And(/^I select "([^"]*)" adults$/) do |arg|
