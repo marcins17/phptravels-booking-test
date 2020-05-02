@@ -66,12 +66,20 @@ And(/^I select "([^"]*)" children$/) do |arg|
   end
 end
 
-And(/^I submit data by clicking search button$/) do
+And(/^I submit by clicking on a search button$/) do
   search_button = @browser.button(:type => "submit", :class => "btn-primary btn btn-block")
   click_on_element(search_button)
 end
 
-Then(/^flight results should be displayed by price ascending$/) do
-  sleep(4)
-
+Then(/^results should be displayed by price ascending and have NYC as starting point and Munich as destination$/) do
+  results_container = @browser.ul(:id => "LIST", :class => /list_data/).wait_until(&:present?)
+  results_container.wait_until(&:present?)
+  starting_point = "New York"
+  destination_point = "Munich"
+  parse_data
+  assert($price_elements == $price_elements.sort, "FAILURE: results are not sorted by price ascending")
+  assert($starting_point_elements.all?{ |element| element == starting_point },
+         "FAILURE: #{starting_point} is not visible in all results as a starting_point")
+  assert($destination_point_elements.all?{ |element| element == destination_point },
+         "FAILURE: #{destination_point} is not visible in all results as a destination point")
 end

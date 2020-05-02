@@ -18,20 +18,20 @@ def click_on_element(element)
   element.fire_event("click")
 end
 
-def get_results
+def parse_data
   results = @browser.lis(:class => %w(all item))
-  $price_array = []
-  $duration_array = []
-  $starting_point_array = []
-  $destination_point_array = []
+  $price_elements = []
+  $duration_elements = []
+  $starting_point_elements = []
+  $destination_point_elements = []
   results.each do |li|
     price = li.input(:id => "price").value.to_i
     duration = li.div(:class => /-fly-time/).text
     starting_point = li.div(:class => /-line-start/).div(:class => /-line-title/).text
     destination_point = li.div(:class => /-line-end/).div(:class => /-line-title/).text
-    $price_array.push(price)
-    $duration_array.push(duration)
-    $starting_point_array.push(starting_point)
-    $destination_point_array.push(destination_point)
+    $price_elements.push(price)
+    $duration_elements.push(duration)
+    $starting_point_elements.push(starting_point)
+    $destination_point_elements.push(destination_point)
   end
 end

@@ -24,11 +24,14 @@ GEM
     gherkin (5.1.0)
     multi_json (1.14.1)
     multi_test (0.1.2)
+    power_assert (1.1.7)
     regexp_parser (1.7.0)
     rubyzip (2.3.0)
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    test-unit (3.3.5)
+      power_assert
     watir (6.16.5)
       regexp_parser (~> 1.2)
       selenium-webdriver (~> 3.6)
@@ -38,6 +41,7 @@ PLATFORMS
 
 DEPENDENCIES
   cucumber
+  test-unit
   watir
 
 BUNDLED WITH

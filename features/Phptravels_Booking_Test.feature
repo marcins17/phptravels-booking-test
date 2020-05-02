@@ -10,10 +10,10 @@ Feature: PHPTRAVELS flight booking feature
     And I select departure date in "14" days
     And I select "2" adults
     And I select "2" children
-    And I submit data by clicking search button
+    And I submit by clicking on a search button
 
   Scenario: Results are displayed sorted by price (from lowest to highest)
-    Then flight results should be displayed by price ascending
+    Then results should be displayed by price ascending and have NYC as starting point and Munich as destination
   #TODO
   #Scenario: Booking summary displays correct information on the checkout page
     #Then booking summary displays correct information
