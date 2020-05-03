@@ -71,3 +71,8 @@ Then(/^results should be displayed by price ascending and have NYC as starting p
   assert(data[2].all?{ |element| element == destination_point },
          "FAILURE: #{destination_point} is not visible in all results as a destination point")
 end
+
+Then(/^ticket with the fastest route should be booked$/) do
+  data = parse_data
+  puts data[3]
+end

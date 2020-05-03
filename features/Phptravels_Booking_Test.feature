@@ -17,8 +17,7 @@ Feature: PHPTRAVELS flight booking feature
   #TODO
   #Scenario: Booking summary displays correct information on the checkout page
     #Then booking summary displays correct information
-  
-  #Scenario: Book a flight using the fastest route
-    #---credential input, next steps
-    #Then ticket with the fastest route should be booked
+
+  Scenario: Book a flight using the fastest route
+    Then ticket with the fastest route should be booked
     
