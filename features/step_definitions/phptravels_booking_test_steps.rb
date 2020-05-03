@@ -41,7 +41,7 @@ end
 
 And(/^I select "([^"]*)" adults$/) do |arg|
   add_button = @browser.div(:index => 1, :class => "col-4").button(:class => %w(bootstrap-touchspin-up))
-  adults = ("#{arg}".to_i - 1)
+  adults = ("#{arg}".to_i - 1)  # 1 adult is added by default
   adults.times do
     add_button.click
   end
