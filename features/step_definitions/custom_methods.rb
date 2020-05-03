@@ -25,13 +25,9 @@ def parse_data
   $starting_point_elements = []
   $destination_point_elements = []
   results.each do |li|
-    price = li.input(:id => "price").value.to_i
-    duration = li.div(:class => /-fly-time/).text
-    starting_point = li.div(:class => /-line-start/).div(:class => /-line-title/).text
-    destination_point = li.div(:class => /-line-end/).div(:class => /-line-title/).text
-    $price_elements.push(price)
-    $duration_elements.push(duration)
-    $starting_point_elements.push(starting_point)
-    $destination_point_elements.push(destination_point)
+    $price_elements.push(li.input(:id => "price").value.to_i)
+    $duration_elements.push(li.div(:class => /-fly-time/).text)
+    $starting_point_elements.push(li.div(:class => /-line-start/).div(:class => /-line-title/).text)
+    $destination_point_elements.push(li.div(:class => /-line-end/).div(:class => /-line-title/).text)
   end
 end
