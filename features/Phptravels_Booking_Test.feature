@@ -7,7 +7,7 @@ Feature: PHPTRAVELS flight booking feature
     When I select "flights" section
     And I provide "NYC" as a starting point
     And I provide "Munich" as a destination point
-    And I select departure date in "14" days
+    And I select date of departure in "14" days
     And I select "2" adults
     And I select "2" children
     And I submit by clicking on a search button

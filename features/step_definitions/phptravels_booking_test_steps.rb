@@ -20,7 +20,7 @@ And(/^I provide "([^"]*)" as a destination point$/) do |arg|
   set_travel_point("#{arg}")
 end
 
-And(/^I select departure date in "([^"]*)" days$/) do |arg|
+And(/^I select date of departure in "([^"]*)" days$/) do |arg|
   current_date = Date.today
   days_to_departure = "#{arg}".to_i
   departure_date = (current_date + days_to_departure).to_s.split("-")
@@ -40,12 +40,7 @@ And(/^I select departure date in "([^"]*)" days$/) do |arg|
 end
 
 And(/^I select "([^"]*)" adults$/) do |arg|
-  #
-  #add_button = @browser.div(:class => %w(col o2)).button(:class => %w(btn bootstrap-touchspin-up))
-  #
-  # I was trying with button implementation like above, but no action happened after click
-  add_button = @browser.element(
-      :xpath => "//*[@id='flights']/div/div/form/div/div[3]/div[3]/div/div/div[1]/div/div[2]/div/span/button[1]")
+  add_button = @browser.div(:index => 1, :class => "col-4").button(:class => %w(bootstrap-touchspin-up))
   adults = ("#{arg}".to_i - 1)
   adults.times do
     add_button.click
@@ -53,13 +48,7 @@ And(/^I select "([^"]*)" adults$/) do |arg|
 end
 
 And(/^I select "([^"]*)" children$/) do |arg|
-  #
-  #add_button = @browser.div(:class => %w(col o1)).button(:class => %w(btn bootstrap-touchspin-up))
-  #
-  # I was trying with button implementation like above, but no action happened after click
-  #
-  add_button = @browser.element(
-      :xpath => "//*[@id='flights']/div/div/form/div/div[3]/div[3]/div/div/div[2]/div/div[2]/div/span/button[1]")
+  add_button = @browser.div(:index => 2, :class => "col-4").button(:class => %w(bootstrap-touchspin-up))
   children = "#{arg}".to_i
   children.times do
     add_button.click
