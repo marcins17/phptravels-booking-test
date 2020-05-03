@@ -3,10 +3,12 @@
 Supported browser: chrome
 
 Work progress:
-  Backgorund scenario completed. 
+  COMPLETED:
+  * Backgorund scenario
+  * Results should be displayed by price ascending and have NYC as starting point and Munich as destination"
 
-TODO:
-  Three case scenarions still wait for implementation
+  TODO:
+  Two case scenarions still wait for implementation
   
   Major improvement:
   * add_button (passengers)
