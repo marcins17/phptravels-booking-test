@@ -20,14 +20,15 @@ end
 
 def parse_data
   results = @browser.lis(:class => %w(all item))
-  $price_elements = []
-  $duration_elements = []
-  $starting_point_elements = []
-  $destination_point_elements = []
+  price_elements = []
+  starting_point_elements = []
+  destination_point_elements = []
+  duration_elements = []
   results.each do |li|
-    $price_elements.push(li.input(:id => "price").value.to_i)
-    $duration_elements.push(li.div(:class => /-fly-time/).text)
-    $starting_point_elements.push(li.div(:class => /-line-start/).div(:class => /-line-title/).text)
-    $destination_point_elements.push(li.div(:class => /-line-end/).div(:class => /-line-title/).text)
+    price_elements.push(li.input(:id => "price").value.to_i)
+    starting_point_elements.push(li.div(:class => /-line-start/).div(:class => /-line-title/).text)
+    destination_point_elements.push(li.div(:class => /-line-end/).div(:class => /-line-title/).text)
+    duration_elements.push(li.div(:class => /-fly-time/).text)
   end
+  return price_elements, starting_point_elements, destination_point_elements, duration_elements
 end

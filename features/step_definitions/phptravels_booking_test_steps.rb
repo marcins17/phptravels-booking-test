@@ -3,7 +3,6 @@ require 'date'
 
 Given(/^I am on the booking site homepage/) do
   @browser.goto "https://www.phptravels.net/home"
-    #@browser.goto "https://www.phptravels.net/thflights/search/NYC/MUC/oneway/economy/2020-05-14/2/2/0"
 end
 
 When(/^I select "([^"]*)" section$/) do |arg|
@@ -61,14 +60,14 @@ And(/^I submit by clicking on a search button$/) do
 end
 
 Then(/^results should be displayed by price ascending and have NYC as starting point and Munich as destination$/) do
-  results_container = @browser.ul(:id => "LIST", :class => /list_data/).wait_until(&:present?)
+  results_container = @browser.ul(:id => "LIST", :class => /list_data/)#.wait_until(&:present?)
   results_container.wait_until(&:present?)
   starting_point = "New York"
   destination_point = "Munich"
-  parse_data
-  assert($price_elements == $price_elements.sort, "FAILURE: results are not sorted by price ascending")
-  assert($starting_point_elements.all?{ |element| element == starting_point },
+  data = parse_data
+  assert(data[0] == data[0].sort, "FAILURE: results are not sorted by price ascending")
+  assert(data[1].all?{ |element| element == starting_point },
          "FAILURE: #{starting_point} is not visible in all results as a starting_point")
-  assert($destination_point_elements.all?{ |element| element == destination_point },
+  assert(data[2].all?{ |element| element == destination_point },
          "FAILURE: #{destination_point} is not visible in all results as a destination point")
 end
