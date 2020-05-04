@@ -28,7 +28,24 @@ def parse_data
     price_elements.push(li.input(:id => "price").value.to_i)
     starting_point_elements.push(li.div(:class => /-line-start/).div(:class => /-line-title/).text)
     destination_point_elements.push(li.div(:class => /-line-end/).div(:class => /-line-title/).text)
-    duration_elements.push(li.div(:class => /-fly-time/).text)
+    duration_elements.push(li.div(:class => /-fly-time/).text.gsub(/[^0-9]/, ""))
   end
   return price_elements, starting_point_elements, destination_point_elements, duration_elements
+end
+
+def find_index_of_fastest_route
+  data = parse_data
+  duration = []
+  data[3].each { |i|
+    if i.length == 3
+      duration.push(i.insert(2, "0").to_i) # insert leading zero to minutes if minutes number is one digit
+    else
+      duration.push(i.to_i)
+    end
+  }
+  fastest_route = duration.each_with_index.min
+  fastest_route_index = fastest_route[1]
+  puts duration
+  puts fastest_route
+  return fastest_route_index
 end

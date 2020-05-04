@@ -73,6 +73,7 @@ Then(/^results should be displayed by price ascending and have NYC as starting p
 end
 
 Then(/^ticket with the fastest route should be booked$/) do
-  data = parse_data
-  puts data[3]
+  fastest_route_index = find_index_of_fastest_route
+  puts fastest_route_index
+
 end
