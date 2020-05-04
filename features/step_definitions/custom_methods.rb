@@ -44,8 +44,7 @@ def find_index_of_fastest_route
     end
   }
   fastest_route = duration.each_with_index.min
+  puts "Fastest route trip duration: " + fastest_route[0].to_s.insert(4, "m").insert(2, "h")
   fastest_route_index = fastest_route[1]
-  puts duration
-  puts fastest_route
   return fastest_route_index
 end

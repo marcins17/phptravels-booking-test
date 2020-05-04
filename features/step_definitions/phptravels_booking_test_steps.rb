@@ -60,8 +60,6 @@ And(/^I submit by clicking on a search button$/) do
 end
 
 Then(/^results should be displayed by price ascending and have NYC as starting point and Munich as destination$/) do
-  results_container = @browser.ul(:id => "LIST", :class => /list_data/)#.wait_until(&:present?)
-  results_container.wait_until(&:present?)
   starting_point = "New York"
   destination_point = "Munich"
   data = parse_data
@@ -72,8 +70,15 @@ Then(/^results should be displayed by price ascending and have NYC as starting p
          "FAILURE: #{destination_point} is not visible in all results as a destination point")
 end
 
-Then(/^ticket with the fastest route should be booked$/) do
+Given(/^from results I select a ticket with the fastest route$/) do
   fastest_route_index = find_index_of_fastest_route
-  puts fastest_route_index
+  book_now_button = @browser.li(:index => fastest_route_index, :class => %w(all item)).button(:type => "submit")
+  book_now_button.click
+end
 
+Then(/^ticket with the fastest route should be booked$/) do
+  user = "user@phptravels.com"
+  password = "demouser"
+  # insert ticket data
+  sleep(5)
 end
