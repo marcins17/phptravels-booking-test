@@ -14,10 +14,9 @@ Feature: PHPTRAVELS flight booking feature
 
   Scenario: Results are displayed sorted by price (from lowest to highest)
     Then results should be displayed by price ascending and have NYC as starting point and Munich as destination
-  #TODO
-  #Scenario: Booking summary displays correct information on the checkout page
-    #Then booking summary displays correct information
 
   Scenario: Book a flight using the fastest route
+    Given from results I select a ticket with the fastest route
+    #And booking summary displays correct information on the checkout page
     Then ticket with the fastest route should be booked
     
