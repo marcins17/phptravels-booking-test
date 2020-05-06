@@ -3,7 +3,7 @@
 Supported browser: chrome
 
 Work progress:
-  COMPLETED:
+  DONE:
   * Backgorund scenario
   * Case 1: Results should be displayed by price ascending and have NYC as starting point and Munich as destination"
   * Case 2: Ticket selection using the fastest route completed
